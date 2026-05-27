@@ -76,11 +76,6 @@ terminal-colorsaurus = "1.0"
 unicode-segmentation = "1.13.2"
 itertools = "0.14.0"
 
-[dependencies.git2]
-version = "0.20"
-optional = true
-default-features = false
-
 [dependencies.syntect]
 version = "5.3.0"
 default-features = false
@@ -92,7 +87,11 @@ optional = true
 features = ["wrap_help", "cargo"]
 
 [target.'cfg(target_os = "macos")'.dependencies]
+git2 = { version = "0.20", optional = true, default-features = false, features = ["vendored-libgit2"] }
 plist = "1.7.0"
+
+[target.'cfg(not(target_os = "macos"))'.dependencies]
+git2 = { version = "0.20", optional = true, default-features = false }
 
 [dev-dependencies]
 assert_cmd = "2.0.16"
